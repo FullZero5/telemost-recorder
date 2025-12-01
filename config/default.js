@@ -10,7 +10,7 @@ module.exports = {
             '--autoplay-policy=no-user-gesture-required',
             '--use-fake-ui-for-media-stream',
             '--use-fake-device-for-media-stream',
-            `--use-file-for-fake-video-capture=${path.join(process.cwd(), 'm.y4m')}`,
+            `--use-file-for-fake-video-capture=${path.join(process.cwd(), 'm2.y4m')}`,
             `--use-file-for-fake-audio-capture=${path.join(process.cwd(), 'audio.wav')}`
         ]
     },

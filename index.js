@@ -4,7 +4,7 @@ const logger = require('./utils/logger');
 // Конфигурация приложения
 const config = {
     meetingUrl: 'https://telemost.yandex.ru/j/38748969812297',
-    duration: 30000 // 30 секунд
+    duration: 900000 // 30 секунд
 };
 
 // Запуск приложения
