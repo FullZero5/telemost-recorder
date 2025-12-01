@@ -13,6 +13,6 @@ Application.run(config)
         process.exit(success ? 0 : 1);
     })
     .catch(error => {
-        logger.error('💥 Фатальная ошибка:', error);
+        logger.error(' Фатальная ошибка:', error);
         process.exit(1);
     });

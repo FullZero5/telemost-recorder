@@ -60,7 +60,7 @@ class AudioRecorder {
 
     async start() {
         this.audioFile = this.generateFilename();
-        logger.info(`🎙️ Запускаем запись: ${this.audioFile}`);
+        logger.info(`️ Запускаем запись: ${this.audioFile}`);
 
         this.process = spawn('ffmpeg', this.getFFmpegArgs(), {
             stdio: 'pipe',
@@ -79,12 +79,12 @@ class AudioRecorder {
         });
 
         this.process.on('error', (error) => {
-            logger.error('\n❌ Ошибка запуска FFmpeg:', error.message);
+            logger.error('\n Ошибка запуска FFmpeg:', error.message);
             this.isRecording = false;
         });
 
         this.process.on('close', (code) => {
-            logger.error(`\n📊 FFmpeg завершился с кодом: ${code}`);
+            logger.error(`\n FFmpeg завершился с кодом: ${code}`);
             this.isRecording = false;
         });
     }
@@ -97,10 +97,10 @@ class AudioRecorder {
             }
         }
         else if (output.includes('Error') || output.includes('Invalid')) {
-            logger.error('\n❌ FFmpeg ошибка:', output.trim());
+            logger.error('\n FFmpeg ошибка:', output.trim());
         }
         else if (output.includes('Press') || output.includes('start')) {
-            logger.info('\n✅ FFmpeg начал запись');
+            logger.info('\n FFmpeg начал запись');
             this.isRecording = true;
         }
     }
@@ -110,10 +110,10 @@ class AudioRecorder {
         await new Promise(resolve => setTimeout(resolve, timeout));
 
         if (this.process && !this.process.killed && this.isRecording) {
-            logger.info('✅ FFmpeg запущен и записывает!');
+            logger.info(' FFmpeg запущен и записывает!');
             return true;
         } else {
-            logger.error('❌ FFmpeg не запустился');
+            logger.error(' FFmpeg не запустился');
             return false;
         }
     }
@@ -126,7 +126,7 @@ class AudioRecorder {
 
         await new Promise(resolve => {
             this.process.on('exit', () => {
-                logger.info('✅ FFmpeg остановлен');
+                logger.info(' FFmpeg остановлен');
                 resolve();
             });
             setTimeout(resolve, 3000);
@@ -141,18 +141,18 @@ class AudioRecorder {
         if (fs.existsSync(this.audioFile)) {
             const stats = fs.statSync(this.audioFile);
             const fileSize = Math.round(stats.size / 1024);
-            logger.info(`💾 Файл создан: ${this.audioFile}`);
-            logger.info(`📏 Размер: ${fileSize} KB`);
+            logger.info(` Файл создан: ${this.audioFile}`);
+            logger.info(` Размер: ${fileSize} KB`);
 
             if (fileSize > 10) {
-                logger.info('🎉 ЗАПИСЬ УСПЕШНА!');
+                logger.info(' ЗАПИСЬ УСПЕШНА!');
                 return true;
             } else {
-                logger.error('⚠️ Файл очень маленький, возможно запись пустая');
+                logger.error('️ Файл очень маленький, возможно запись пустая');
                 return false;
             }
         } else {
-            logger.error('❌ Файл не создан');
+            logger.error(' Файл не создан');
             return false;
         }
     }

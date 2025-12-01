@@ -5,20 +5,20 @@ class DependencyChecker {
     static checkFFmpeg() {
         try {
             execSync('ffmpeg -version', { stdio: 'ignore' });
-            logger.info('✅ FFmpeg доступен');
+            logger.info(' FFmpeg доступен');
             return true;
         } catch (error) {
-            logger.error('❌ FFmpeg не найден');
+            logger.error(' FFmpeg не найден');
             return false;
         }
     }
 
     static async checkAll() {
-        logger.info('🔍 Проверка зависимостей...');
+        logger.info(' Проверка зависимостей...');
         const ffmpegAvailable = this.checkFFmpeg();
         
         if (!ffmpegAvailable) {
-            logger.error('💡 Установите FFmpeg: https://ffmpeg.org/download.html');
+            logger.error(' Установите FFmpeg: https://ffmpeg.org/download.html');
         }
         
         return ffmpegAvailable;

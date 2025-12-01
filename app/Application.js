@@ -22,13 +22,13 @@ class Application {
             if (success) {
                 this.printFinalReport(recorder);
             } else {
-                logger.error('❌ Сессия записи завершилась с ошибками');
+                logger.error(' Сессия записи завершилась с ошибками');
             }
 
             return success;
 
         } catch (error) {
-            logger.error('💥 Критическая ошибка:', error);
+            logger.error(' Критическая ошибка:', error);
             throw error;
         } finally {
             await recorder.close();
@@ -38,11 +38,11 @@ class Application {
     static printFinalReport(recorder) {
         const info = recorder.getRecordingInfo();
         
-        logger.info('\n🎉 ФИНАЛЬНЫЙ ОТЧЕТ:');
-        logger.info('   ✅ Автоподключение к Телемосту - РАБОТАЕТ');
-        logger.info('   ✅ Stereo Mix - АКТИВИРОВАН');
-        logger.info('   ✅ Запись звука - ЗАПУЩЕНА');
-        logger.info(`   💾 Аудиофайл: ${info.filePath}`);
+        logger.info('\n ФИНАЛЬНЫЙ ОТЧЕТ:');
+        logger.info('    Автоподключение к Телемосту - РАБОТАЕТ');
+        logger.info('    Stereo Mix - АКТИВИРОВАН');
+        logger.info('    Запись звука - ЗАПУЩЕНА');
+        logger.info(`    Аудиофайл: ${info.filePath}`);
     }
 }
 

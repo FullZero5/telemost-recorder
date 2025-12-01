@@ -11,7 +11,7 @@ class BrowserManager {
     }
 
     async launch() {
-        logger.info('🚀 Запускаем браузер...');
+        logger.info(' Запускаем браузер...');
         
         this.browser = await chromium.launch(this.config);
         this.context = await this.browser.newContext({
@@ -20,14 +20,14 @@ class BrowserManager {
         });
 
         this.page = await this.context.newPage();
-        logger.info('✅ Браузер запущен');
+        logger.info(' Браузер запущен');
         return this;
     }
 
     async close() {
         if (this.browser) {
             await this.browser.close();
-            logger.info('🔚 Браузер закрыт');
+            logger.info(' Браузер закрыт');
         }
     }
 

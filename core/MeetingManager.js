@@ -10,7 +10,7 @@ class MeetingManager {
 
     async connect(url) {
         try {
-            logger.info(`🔗 Подключаемся: ${url}`);
+            logger.info(` Подключаемся: ${url}`);
             const page = this.browserManager.getPage();
 
             await page.goto(url, {
@@ -18,7 +18,7 @@ class MeetingManager {
                 timeout: this.config.timeout
             });
 
-            logger.info('📄 Страница загружена...');
+            logger.info(' Страница загружена...');
 
             await this.performConnectionSteps();
             await this.verifyConnection();
@@ -26,7 +26,7 @@ class MeetingManager {
             return this.isConnected;
 
         } catch (error) {
-            logger.error('❌ Ошибка подключения:', error.message);
+            logger.error(' Ошибка подключения:', error.message);
             return false;
         }
     }
@@ -40,7 +40,7 @@ class MeetingManager {
             
             if (element) {
                 await element.click();
-                logger.info(`✅ ${step.description}`);
+                logger.info(` ${step.description}`);
                 await page.waitForTimeout(step.delay);
             }
         }
@@ -52,10 +52,10 @@ class MeetingManager {
         
         const videoElement = await page.$(this.config.connectionCheckSelector);
         if (videoElement) {
-            logger.info('🎉 УСПЕШНО ПОДКЛЮЧИЛИСЬ К КОНФЕРЕНЦИИ!');
+            logger.info(' УСПЕШНО ПОДКЛЮЧИЛИСЬ К КОНФЕРЕНЦИИ!');
             this.isConnected = true;
         } else {
-            logger.error('❌ Не удалось подтвердить подключение');
+            logger.error(' Не удалось подтвердить подключение');
             this.isConnected = false;
         }
     }

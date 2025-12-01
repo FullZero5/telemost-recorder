@@ -16,24 +16,24 @@ class TelemostRecorder {
     async initialize() {
         await this.browserManager.launch();
         this.meetingManager = new MeetingManager(this.browserManager, this.config.meeting);
-        logger.info('✅ Рекордер инициализирован');
+        logger.info(' Рекордер инициализирован');
         return this;
     }
 
     async startRecordingSession(meetingUrl, duration = this.config.recording.defaultDuration) {
-        logger.info('🎯 Начинаем сессию записи...');
+        logger.info(' Начинаем сессию записи...');
 
         const connected = await this.meetingManager.connect(meetingUrl);
         if (!connected) {
-            logger.error('❌ Не удалось подключиться к встрече');
+            logger.error(' Не удалось подключиться к встрече');
             return false;
         }
 
-        logger.info('\n🔊 ЗАПУСК ЗАПИСИ ЗВУКА...');
+        logger.info('\n ЗАПУСК ЗАПИСИ ЗВУКА...');
         const recordingStarted = await this.audioRecorder.start();
         
         if (!recordingStarted) {
-            logger.error('❌ Не удалось запустить запись звука');
+            logger.error(' Не удалось запустить запись звука');
             return false;
         }
 
@@ -56,17 +56,17 @@ class TelemostRecorder {
             secondsPassed = Math.round((Date.now() - startTime) / 1000);
 
             if (secondsPassed % 10 === 0) {
-                logger.info(`📈 Мониторинг: ${secondsPassed} секунд`);
+                logger.info(` Мониторинг: ${secondsPassed} секунд`);
             }
 
             const stillConnected = await this.meetingManager.monitorConnection();
             if (!stillConnected) {
-                logger.info('⚠️ Соединение с конференцией потеряно');
+                logger.info('️ Соединение с конференцией потеряно');
                 break;
             }
         }
 
-        logger.info('\n🛑 ЗАВЕРШЕНИЕ СЕССИИ...');
+        logger.info('\n ЗАВЕРШЕНИЕ СЕССИИ...');
     }
 
     async close() {
@@ -75,7 +75,7 @@ class TelemostRecorder {
         }
         
         await this.browserManager.close();
-        logger.info('✅ Рекордер завершил работу');
+        logger.info(' Рекордер завершил работу');
     }
 
     getRecordingInfo() {
